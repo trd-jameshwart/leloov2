@@ -13,8 +13,7 @@
     font-family: MyFont;
     font-weight: 700;
 }
-#bs-example-navbar-collapse-1 > ul > li:nth-child(2),#bs-example-navbar-collapse-1 > ul > li:nth-child(3) > a,#bs-example-navbar-collapse-1 > ul > li:nth-child(4) > a
-{
+#bs-example-navbar-collapse-1 > ul > li:nth-child(2),#bs-example-navbar-collapse-1 > ul > li:nth-child(3) > a,#bs-example-navbar-collapse-1 > ul > li:nth-child(4) > a, #bs-example-navbar-collapse-1 > ul > li:nth-child(5) > a {
     font-family:"Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 #page-top > header{
@@ -91,7 +90,11 @@ section{
     font-weight: 600;
     float: left;
 }
-
 #mnu_1,#mnu_2,#your,#about,#h_place,#btn-group-places{
     display:none;
+}
+.fb_iframe_widget{
+}
+#select > p{
+    color: #545454;
 }
