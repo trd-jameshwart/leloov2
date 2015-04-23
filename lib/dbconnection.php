@@ -107,3 +107,4 @@ class MySqlDatabase
 
 }
 
+$mysql = new MySqlDatabase();
