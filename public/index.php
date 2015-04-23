@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-   
+
     <title>Leloo</title>
     <link rel="icon" href="img/icon.png" type="image/x-icon">
 
@@ -87,6 +87,7 @@
                 <li id="mnu_3" class="page-scroll">
                     <a href="#contact">Contact</a>
                 </li>
+
             </ul>
         </div>
         <!-- /.navbar-collapse -->
