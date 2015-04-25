@@ -24,6 +24,16 @@ $(document).ready(function(){
             $.post("public/userAction/register.php",{name:user_name,email:user_email,password:password},function(data){
               if(data=='0'){
                   $("#reg_error").html("").fadeIn("<div class='alert alert-danger alert-dismissable'> <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button> <strong>Please fill up empty fields</strong></div>");
+              }else{
+                  $("#reg_error").html("").prepend("<div class='alert alert-success alert-dismissable'> <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button> <strong>Registration Successful</strong></div>");
+                  $("#frm_regiters input[name='username'] ").val("");
+                  $("#frm_regiters input[name='useremail']").val("");
+                  $("#frm_regiters input[name='userpassword']").val("");
+
+                  setTimeout(function(){
+                      $('#registerModal').fadeOut('slow');
+                  },1000)
+
               }
             })
 
@@ -40,7 +50,17 @@ $(document).ready(function(){
 
             }else {
                 $.post("public/userAction/login.php",{email:user_email,password:password},function(data){
-                    alert(data);
+
+                    if(data=='0'){
+                        alert("empty user name and password");
+                    }else if(data=='1'){
+                        alert("user successfully login");
+                        $("#txt_email").val("");
+                        $("#txt_password").val("");
+
+                    }else{
+                        alert(data);
+                    }
                 });
             }
 
