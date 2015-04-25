@@ -15,7 +15,7 @@ $(document).ready(function () {
     $("#selecta").select2({
         placeholder: "Select Places...",
         allowClear: true,
-        maximumSelectionSize: 5
+        maximumSelectionLength: 3
     });
 
     $(document).on("change","#selecta",function(){
