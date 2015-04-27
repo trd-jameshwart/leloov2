@@ -13,8 +13,8 @@
     font-family: MyFont;
     font-weight: 700;
 }
-#bs-example-navbar-collapse-1 > ul > li:nth-child(2),#bs-example-navbar-collapse-1 > ul > li:nth-child(3) > a,#bs-example-navbar-collapse-1 > ul > li:nth-child(4) > a, #bs-example-navbar-collapse-1 > ul > li:nth-child(5) > a {
-    font-family:"Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+#bs-example-navbar-collapse-1 > ul > li:nth-child(2),#bs-example-navbar-collapse-1 > ul > li:nth-child(3) > a,#bs-example-navbar-collapse-1 > ul > li:nth-child(4) > a,#mnu_4 > div.user_reg > input:nth-child(1),#mnu_4 > div.user_reg > input:nth-child(2),#btn-group-login > button , #btn-group-login > a, #status {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #page-top > header{
     background: #fff;
@@ -66,10 +66,10 @@
     display: none;
 }
 section{
-    padding: 100px 0 50px !important;
+    padding: 180px 0 50px !important;
 }
 .intro > p{
-    font-size: 32px;
+    font-size: 30px;
     color: #545454;
 }
 .foot-nom{
@@ -97,4 +97,10 @@ section{
 }
 #select > p{
     color: #545454;
+}
+#mnu_4{
+    padding: 0 1em 0 1em;
+}
+#status{
+    color: #fff;
 }

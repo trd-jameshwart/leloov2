@@ -74,8 +74,8 @@
             } else {
                 // The person is not logged into Facebook, so we're not sure if
                 // they are logged into this app or not.
-                document.getElementById('status').innerHTML = 'Please log ' +
-                'into Facebook.';
+                document.getElementById('status').innerHTML = 'Connect ' +
+                'with Facebook';
             }
         }
 
@@ -129,9 +129,11 @@
         function testAPI() {
             console.log('Welcome!  Fetching your information.... ');
             FB.api('/me', function(response) {
-                console.log('Successful login for: ' + response.name);
-                document.getElementById('status').innerHTML =
-                    'Thanks for logging in, ' + response.name + '!';
+                if (response && !response.error) {
+                    console.log('Successful login for: ' + response.name);
+                    document.getElementById('status').innerHTML =
+                        'Howdy, ' + response.name + '!';
+                }
             });
         }
     </script>
@@ -168,7 +170,20 @@
                     <a href="#contact">Contact</a>
                 </li>
                 <li id="mnu_4" class="page-scroll">
-                    <a href="#rate">Rate</a>
+                    <div id="status">
+                    </div>
+                    <fb:login-button data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" scope="public_profile,email" onlogin="checkLoginState();">
+                    </fb:login-button>&nbsp;or
+                    <div class="user_reg">
+                        <input class="form-control input-sm" type="email" required="email" placeholder="Email">
+                        <input class="form-control input-sm" type="password" required="password" placeholder="Password">
+                        <div id="btn-group-login" class="btn-group btn-group-sm" role="group" aria-label="Default button group">
+                            <button class="btn btn-success ">Login</button>
+                            <a class="btn btn-primary" href="">Register</a>
+                        </div>
+
+
+                    </div>
                 </li>
             </ul>
 
@@ -181,31 +196,10 @@
     <div class="container">
         <div class="row">
             <div id="select" class="col-lg-12 text-center">
-                <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                </fb:login-button>
-
-                <div id="status">
-                </div>
-                <p class="intro">or</p>
-                <div class="user_reg">
-                    <input class="form-control" type="email" required="email" placeholder="Email">
-                    <input class="form-control" type="password" required="password" placeholder="Password">
-                    <p>
-                    <div id="btn-group-login" class="btn-group" role="group" aria-label="Default button group">
-                        <button class="btn btn-success">Login</button>
-                        <a class="btn btn-default" href="">Register</a>
-                    </div>
-
-
-                </div>
-
-
-            </div>
-            <div id="select" class="col-lg-12 text-center">
 
                 <div class="intro-text">
 
-                    <span class="skills"><strong>Leloo</strong> is an app that helps you when going to new places when you're letting loose of yourself. Great companion, just a hit of a button and you will know your current location and places near you (eg. <i>bars,
+                    <span class="skills"><strong>Leloo</strong> is an app that helps you when going to new places when you're letting loose of yourself. Great companion, just hit of a button and you will know your current location and places near you (eg. <i>bars,
                             hotels, stores, etc.</i>). If you find this app useful or you have suggestions to improve this app, you may send us a feedback at <strong>Contact</strong> section</span>
                     <span class="intro"><p>To <strong>start</strong>&nbsp;select place/s you want know about, then hit
                             <strong>Go</strong>.</p></span>
@@ -231,7 +225,7 @@
     </div>
 </header>
 <!-- Portfolio Grid Section -->
-<section id="portfolio" class="section-md">
+<section id="portfolio">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -343,21 +337,6 @@
         </div>
     </div>
 </section>
-<section id="rate">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2>Rate</h2>
-
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- Footer -->
 <footer class="text-center">
     <div class="footer-above">
@@ -416,6 +395,5 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="js/freelancer.js"></script>
-
 </body>
 </html>
