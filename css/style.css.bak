@@ -13,14 +13,14 @@
     font-family: MyFont;
     font-weight: 700;
 }
-#bs-example-navbar-collapse-1 > ul > li:nth-child(2),#bs-example-navbar-collapse-1 > ul > li:nth-child(3) > a,#bs-example-navbar-collapse-1 > ul > li:nth-child(4) > a,#mnu_4 > div.user_reg > input:nth-child(2),#btn-group-login > button , #btn-group-login > a, #status, #mnu_4{
+#bs-example-navbar-collapse-1 > ul > li:nth-child(2),#bs-example-navbar-collapse-1 > ul > li:nth-child(3) > a,#bs-example-navbar-collapse-1 > ul > li:nth-child(4) > a,#mnu_4 > div.user_reg > input:nth-child(1),#mnu_4 > div.user_reg > input:nth-child(2),#btn-group-login > button , #btn-group-login > a, #status {
     font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 #page-top > header{
     background: #fff;
 }
-#select > div > span.skills{
-    color: #545454!important;
+#page-top > header > div > div > div > div > span.skills{
+    color: #545454;
 }
 .btn-outline {
     background: #82bae5;
@@ -71,7 +71,6 @@ section{
 .intro > p{
     font-size: 30px;
     color: #545454;
-
 }
 .foot-nom{
     font-family: MyFont;
