@@ -1,6 +1,3 @@
-<?php
-    require_once("lib/initialize.php");
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,7 +54,8 @@
             });
         });
 
-
+    </script>
+    <script>
         // This is called with the results from from FB.getLoginStatus().
         function statusChangeCallback(response) {
             console.log('statusChangeCallback');
@@ -190,50 +188,15 @@
                 </div>
                 <p class="intro">or</p>
                 <div class="user_reg">
-                    <form id="user_login" accept-charset="UTF-8" action="public/userAction/login.php" method="post">
-                        <input class="form-control" id="txt_email" type="email" required="email" placeholder="Email">
-                        <input class="form-control" id="txt_password" type="password" required="password" placeholder="Password">
-                        <p>
-                        <div id="btn-group-login" class="btn-group" role="group" aria-label="Default button group">
-                            <button class="btn btn-success" id="btn_login">Login</button>
-                            <button type="button" id="btn_register" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">Register</button>
-                        </div>
-                    </form>
-
-                <!-- modal code -->
-
-
-                    <div  data-backdrop="static" class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="exampleModalLabel" style="color:#000000">Please fill out the following fields</h4>
-                                </div>
-                                <form id="frm_regiters" accept-charset="UTF-8"  method="post">
-                                    <div class="modal-body">
-                                            <div id="reg_error"></div>
-                                            <div class="form-group">
-                                                <input  name="username" type="text" class="form-control" placeholder="Name">
-                                            </div>
-                                            <div class="form-group">
-                                                <input name="useremail"  type="email" class="form-control" placeholder="Email">
-                                            </div>
-                                            <div class="form-group">
-                                                <input name="userpassword" type="password" class="form-control" placeholder="Password">
-                                            </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button  class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="submit" name="register" class="btn btn-primary">Continue</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                    <input class="form-control" type="email" required="email" placeholder="Email">
+                    <input class="form-control" type="password" required="password" placeholder="Password">
+                    <p>
+                    <div id="btn-group-login" class="btn-group" role="group" aria-label="Default button group">
+                        <button class="btn btn-success">Login</button>
+                        <a class="btn btn-default" href="">Register</a>
                     </div>
 
-                <!-- end modal code -->
+
                 </div>
 
 
@@ -487,12 +450,6 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="js/freelancer.js"></script>
-<script type="text/javascript" src="js/bootstrap/popover.js"> </script>
-<script type="text/javascript" src="js/user.js"></script>
-<script>
-    $(document).ready(function(){
-        $('[data-toggle="popover"]').popover()
-    });
-</script>
+
 </body>
 </html>
