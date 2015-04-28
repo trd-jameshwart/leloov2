@@ -432,5 +432,7 @@ require_once("lib/initialize.php");
 
 <!-- Custom Theme JavaScript -->
 <script src="js/freelancer.js"></script>
+<script type="text/javascript" src="js/user.js"></script>
+
 </body>
 </html>
