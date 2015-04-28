@@ -1,3 +1,7 @@
+
+<?php
+    include_once('lib/initialize.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
