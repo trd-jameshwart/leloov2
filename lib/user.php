@@ -43,7 +43,7 @@ class User {
             $this->logged_in = true;
             $_SESSION['userid'] =$found_user['id'];
             $this->userid = $found_user['id'];
-
+            $this->get_userInformation($found_user["id"]);
             return true;
         }else{
             return false;

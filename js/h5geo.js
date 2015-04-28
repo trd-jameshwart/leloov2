@@ -12,6 +12,10 @@ var sortyby ="PROMINENCE";
 var place_details_sortbyprominence=[];
 var place_details_sorbydistance = [];
 $(document).ready(function () {
+
+    $(document).on("click",".add_review",function(){
+        $("#frm_reviews").attr('andid','james');
+    });
     $("#selecta").select2({
         placeholder: "Select Places...",
         allowClear: true,
@@ -164,7 +168,7 @@ function findhim(point) {
 
 function callback(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-
+        console.log(results);
         for (var i = 0; i < results.length; i++) {
             if(checkRadiusDistance(results[i],latlng,825)){
                 createMarker(results[i]);
@@ -267,7 +271,7 @@ function display_sorted_results(localstorage_data){
         }
 
         var final_users_review = "<ul class='list-group'>"+user_reviews+"</ul>";
-        str_container += "<div class='col-lg-6 '>"+place_name+place_address+place_img_representation+place_internationa_phonenuber+place_rating+place_website + final_users_review +"</div>";
+        str_container += "<div class='col-lg-6 '> <button class='btn-primary add_review' data-toggle='modal' data-target='#addreviews'> Add reviews</button></button>"+place_name+place_address+place_img_representation+place_internationa_phonenuber+place_rating+place_website + final_users_review +"</div>";
     }
 
     document.getElementById("placeres").innerHTML=str_container;
