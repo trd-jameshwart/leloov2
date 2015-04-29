@@ -20,6 +20,7 @@ class User {
         if(isset($_SESSION['userid'])){
             $this->userid = $_SESSION['userid'];
             $this->logged_in = true;
+            $this->get_userInformation($_SESSION['userid']);
         }else {
             unset($this->userid);
             $this->logged_in=false;
