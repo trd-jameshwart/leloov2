@@ -7,10 +7,11 @@ $(document).ready(function(){
 
     });
 
-    $(document).on('click',"#btn_register",function(){
-        var email = $("#txt_email").val();
-        var password = $("#txt_password").val();
-
+    $("#frm_add_reviews").submit(function(e){
+        var rating = $('#rating-input').val();
+        var text= $("#message-text").val();
+        alert(text +rating);
+        e.preventDefault();
     });
 
     $("#frm_regiters").submit(function(e){
