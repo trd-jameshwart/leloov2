@@ -27,7 +27,7 @@ require_once("lib/initialize.php");
     <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
           type="text/css">
-
+    <link rel="stylesheet" href="css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -39,6 +39,8 @@ require_once("lib/initialize.php");
     <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-rc.2/js/select2.min.js"></script>
     <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0-rc.2/css/select2.min.css" rel="stylesheet"/>
 
+    <!-- rating styles   -->
+    <link rel="stylesheet" href="css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
     <link href="css/select2.min.css" rel="stylesheet"/>
     <script src="js/select2.min.js"></script>
     <script src="js/clear.js"></script>
@@ -130,10 +132,9 @@ require_once("lib/initialize.php");
         // successful.  See statusChangeCallback() for when this call is made.
         function testAPI() {
             console.log('Welcome!  Fetching your information.... ');
-            FB.api('/me', function(response) {
-                console.log('Successful login for: ' + response.name);
+            FB.api('/me',{fields: "id,name,picture"}, function(response) {
                 document.getElementById('status').innerHTML =
-                    'Howdy, ' + response.name + '!';
+                    'Howdy, ' + response.name + '! <img height="24" width="24" src="'+response.picture.data.url+'"> ';
             });
         }
     </script>
@@ -172,10 +173,14 @@ require_once("lib/initialize.php");
                 <li id="mnu_4" class="page-scroll">
                     <div id="status">
                     </div>
-                    <fb:login-button data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" scope="public_profile,email" onlogin="checkLoginState();">
-                    </fb:login-button>&nbsp;or
+                    <div>
+                        <fb:login-button data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" scope="public_profile,email" onlogin="checkLoginState();">
+                        </fb:login-button>&nbsp;or
+                    </div>
+
+
                     <div class="user_reg">
-                        <form id="user_login" accept-charset="UTF-8" action="public/userAction/login.php" method="post">
+                        <form id="user_login" accept-charset="UTF-8" action="<?php echo urlencode('assets/userAction/login.php');?>" method="post">
                             <input class="form-control" id="txt_email" type="email" required="email" placeholder="Email">
                             <input class="form-control" id="txt_password" type="password" required="password" placeholder="Password">
                             <p>
@@ -261,6 +266,37 @@ require_once("lib/initialize.php");
         </div>
     </div>
 </header>
+<!-- review modal code-->
+<div>
+    <div class="modal fade" id="addreview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Writing Review</h4>
+                </div>
+                <form id="frm_add_reviews" action="" method="post">
+                    <div class="modal-body">
+
+                            <div class="form-group">
+                                <input id="rating-input" type="number" />
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="control-label">Message:</label>
+                                <textarea class="form-control" id="message-text"></textarea>
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Continue</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--- end modal view code -->
 <!-- Portfolio Grid Section -->
 <section id="portfolio">
     <div class="container">
@@ -433,6 +469,23 @@ require_once("lib/initialize.php");
 <!-- Custom Theme JavaScript -->
 <script src="js/freelancer.js"></script>
 <script type="text/javascript" src="js/user.js"></script>
+<script src="js/star-rating.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $('#rating-input').rating({
+            min: 0,
+            max: 5,
+            step: 1,
+            size: 'sm',
+            showClear: false
+        });
+
+        $('#rating-input').on('rating.change', function() {
+
+        });
+    });
+</script>
 
 </body>
 </html>
