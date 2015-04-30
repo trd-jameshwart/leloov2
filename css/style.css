@@ -1,6 +1,7 @@
 /**
  * Created by User2 on 4/6/2015.
  */
+
 @font-face {
     font-family: MyFont;
     src: local('MyFont'),local('MyFont'),url('font/letloose.ttf')format('truetype');
@@ -104,4 +105,13 @@ section{
 }
 #status{
     color: #fff;
+}
+textarea {
+    resize: none;
+}
+.userinfo_container{
+    color: #fff;
+}
+.logout{
+
 }
