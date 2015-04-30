@@ -67,7 +67,7 @@
     display: none;
 }
 section{
-    padding: 180px 0 50px !important;
+    padding: 180px 0 50px;
 }
 .intro > p{
     font-size: 30px;

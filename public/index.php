@@ -81,6 +81,8 @@ require_once("lib/initialize.php");
                 document.getElementById('status').innerHTML = 'Please log ' +
                 'into Facebook.';
                 $("#user_login").show();
+                $("section").css({"padding":" 220px 0 50px"});
+                $(".intro-text").css({"padding-top":"50px"});
             }
         }
 
@@ -180,9 +182,11 @@ require_once("lib/initialize.php");
                         if ($user->is_logged_in()) {
                             echo $user->user_fullname . " ";
                             ?>
-                            <div id="btn-group-login" class="btn-group" role="group" aria-label="Default button group">
+
+                            <div style="padding-top: 12.5px;padding-bottom: 19.5px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group">
                                 <button type="button" class="btn btn-primary btn-sm logout">Logout</button>
-                            </div><?php
+                            </div>
+                        <?php
                         }
                         ?>
                     </div>
