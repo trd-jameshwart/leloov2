@@ -7,10 +7,19 @@ $(document).ready(function(){
 
     });
 
+    $(".logout").click(function(){
+        alert(1);
+        window.location.href="public/userAction/logout.php";
+    });
+    $(document).on('click','.add_review',function(){
+        $("#txt_place_id").val($(this).attr('data-place_id'));
+    });
+
     $("#frm_add_reviews").submit(function(e){
         var rating = $('#rating-input').val();
         var text= $("#message-text").val();
-        alert(text +rating);
+        var placeid= $("#txt_place_id").val();
+        alert(text  +'-------------'+rating +'-------------'+ placeid);
         e.preventDefault();
     });
 
@@ -58,7 +67,8 @@ $(document).ready(function(){
                     alert("user successfully login");
                     $("#txt_email").val("");
                     $("#txt_password").val("");
-
+                   location.reload();
+                   // $(".login_wrapper").html("");
                 }else{
                     alert(data);
                 }
