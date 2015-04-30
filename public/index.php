@@ -19,7 +19,7 @@ require_once("lib/initialize.php");
 
     <!-- Custom CSS -->
     <link href="css/freelancer.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -44,9 +44,9 @@ require_once("lib/initialize.php");
     <link href="css/select2.min.css" rel="stylesheet"/>
     <script src="js/select2.min.js"></script>
     <script src="js/clear.js"></script>
-
+    <link href="css/style.css" rel="stylesheet">
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
             $.getJSON("js/place_types.json", function (place_type) {
                 $("#selecta option").remove(); // Remove all <option> child tags.
                 $.each(place_type.place_types, function (index, item) { // Iterates through a collection
@@ -80,6 +80,7 @@ require_once("lib/initialize.php");
                 // they are logged into this app or not.
                 document.getElementById('status').innerHTML = 'Please log ' +
                 'into Facebook.';
+                $("#user_login").show();
             }
         }
 
@@ -87,18 +88,18 @@ require_once("lib/initialize.php");
         // Button.  See the onlogin handler attached to it in the sample
         // code below.
         function checkLoginState() {
-            FB.getLoginStatus(function(response) {
+            FB.getLoginStatus(function (response) {
                 statusChangeCallback(response);
             });
         }
 
-        window.fbAsyncInit = function() {
+        window.fbAsyncInit = function () {
             FB.init({
-                appId      : '380576395482732',
-                cookie     : true,  // enable cookies to allow the server to access
-                                    // the session
-                xfbml      : true,  // parse social plugins on this page
-                version    : 'v2.2' // use version 2.2
+                appId: '380576395482732',
+                cookie: true,  // enable cookies to allow the server to access
+                               // the session
+                xfbml: true,  // parse social plugins on this page
+                version: 'v2.2' // use version 2.2
             });
 
             // Now that we've initialized the JavaScript SDK, we call
@@ -113,17 +114,18 @@ require_once("lib/initialize.php");
             //
             // These three cases are handled in the callback function.
 
-            FB.getLoginStatus(function(response) {
+            FB.getLoginStatus(function (response) {
                 statusChangeCallback(response);
             });
 
         };
 
         // Load the SDK asynchronously
-        (function(d, s, id) {
+        (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
+            js = d.createElement(s);
+            js.id = id;
             js.src = "//connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
@@ -132,9 +134,10 @@ require_once("lib/initialize.php");
         // successful.  See statusChangeCallback() for when this call is made.
         function testAPI() {
             console.log('Welcome!  Fetching your information.... ');
-            FB.api('/me',{fields: "id,name,picture"}, function(response) {
+            FB.api('/me', {fields: "id,name,picture"}, function (response) {
                 document.getElementById('status').innerHTML =
-                    'Howdy, ' + response.name + '! <img height="24" width="24" src="'+response.picture.data.url+'"> ';
+                    'Howdy, ' + response.name + '! <img height="24" width="24" src="' + response.picture.data.url + '"> ';
+                $("#user_login").hide();
             });
         }
     </script>
@@ -171,25 +174,56 @@ require_once("lib/initialize.php");
                     <a href="#contact">Contact</a>
                 </li>
                 <li id="mnu_4" class="page-scroll">
-                    <div id="status">
-                    </div>
-                    <div>
-                        <fb:login-button data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" scope="public_profile,email" onlogin="checkLoginState();">
-                        </fb:login-button>&nbsp;or
-                    </div>
 
-
-                    <div class="user_reg">
-                        <form id="user_login" accept-charset="UTF-8" action="<?php echo urlencode('assets/userAction/login.php');?>" method="post">
-                            <input class="form-control" id="txt_email" type="email" required="email" placeholder="Email">
-                            <input class="form-control" id="txt_password" type="password" required="password" placeholder="Password">
-                            <p>
+                    <div class="userinfo_container">
+                        <?php
+                        if ($user->is_logged_in()) {
+                            echo $user->user_fullname . " ";
+                            ?>
                             <div id="btn-group-login" class="btn-group" role="group" aria-label="Default button group">
-                                <button class="btn btn-success btn-sm" id="btn_login">Login</button>
-                                <button type="button" id="btn_register" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#registerModal">Register</button>
-                            </div>
-                        </form>
+                                <button type="button" class="btn btn-primary btn-sm logout">Logout</button>
+                            </div><?php
+                        }
+                        ?>
                     </div>
+                    <?php
+                    if (!$user->is_logged_in()) {
+                        ?>
+                        <div id="status">
+                        </div>
+                        <div class="login_wrapper">
+                            <fb:login-button data-max-rows="1" data-size="large" data-show-faces="false"
+                                             data-auto-logout-link="true" scope="public_profile,email"
+                                             onlogin="checkLoginState();">
+                            </fb:login-button>
+                        </div>
+
+
+                        <div class="user_reg login_wrapper">
+
+                            <form id="user_login" accept-charset="UTF-8"
+                                  action="<?php echo urlencode('assets/userAction/login.php'); ?>" method="post">
+                                &nbsp;or
+                                <input class="form-control" id="txt_email" type="email" required="email"
+                                       placeholder="Email">
+                                <input class="form-control" id="txt_password" type="password" required="password"
+                                       placeholder="Password">
+
+                                <p>
+
+                                <div id="btn-group-login" class="btn-group" role="group"
+                                     aria-label="Default button group">
+                                    <button class="btn btn-success btn-sm" id="btn_login">Login</button>
+                                    <button type="button" id="btn_register" class="btn btn-primary btn-sm"
+                                            data-toggle="modal" data-target="#registerModal">Register
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    <?php
+                    }
+                    ?>
+
                 </li>
             </ul>
 
@@ -202,89 +236,98 @@ require_once("lib/initialize.php");
     <div class="container">
         <div class="row">
             <div id="select" class="col-lg-12 text-center">
-                    <!-- modal code -->
-                    <div  data-backdrop="static" class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="exampleModalLabel" style="color:#000000">Please fill out the following fields</h4>
-                                </div>
-                                <form id="frm_regiters" accept-charset="UTF-8"  method="post">
-                                    <div class="modal-body">
-                                        <div id="reg_error"></div>
-                                        <div class="form-group">
-                                            <input  name="username" type="text" class="form-control" placeholder="Name">
-                                        </div>
-                                        <div class="form-group">
-                                            <input name="useremail"  type="email" class="form-control" placeholder="Email">
-                                        </div>
-                                        <div class="form-group">
-                                            <input name="userpassword" type="password" class="form-control" placeholder="Password">
-                                        </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button  class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button  id="btn_register" type="submit" name="register" class="btn btn-primary">Continue</button>
-                                    </div>
-                                </form>
+                <!-- modal code -->
+                <div data-backdrop="static" class="modal fade" id="registerModal" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="exampleModalLabel" style="color:#000000">Please fill out the
+                                    following fields</h4>
                             </div>
+                            <form id="frm_regiters" accept-charset="UTF-8" method="post">
+                                <div class="modal-body">
+                                    <div id="reg_error"></div>
+                                    <div class="form-group">
+                                        <input name="username" type="text" class="form-control" placeholder="Name">
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="useremail" type="email" class="form-control" placeholder="Email">
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="userpassword" type="password" class="form-control"
+                                               placeholder="Password">
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button id="btn_register" type="submit" name="register" class="btn btn-primary">
+                                        Continue
+                                    </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <!-- end modal code -->
                 </div>
-
-
+                <!-- end modal code -->
             </div>
-            <div id="select" class="col-lg-12 text-center">
 
-                <div class="intro-text">
+
+        </div>
+        <div id="select" class="col-lg-12 text-center">
+
+            <div class="intro-text">
 
                     <span class="skills"><strong>Leloo</strong> is an app that helps you when going to new places when you're letting loose of yourself. Great companion, just hit of a button and you will know your current location and places near you (eg. <i>bars,
                             hotels, stores, etc.</i>). If you find this app useful or you have suggestions to improve this app, you may send us a feedback at <strong>Contact</strong> section</span>
                     <span class="intro"><p>To <strong>start</strong>&nbsp;select place/s you want know about, then hit
                             <strong>Go</strong>.</p></span>
 
-                    <div id="alert-msg">
-                    </div>
+                <div id="alert-msg">
                 </div>
-
-                <select class="js-example-basic-multiple form-control" multiple="" id="selecta"  >
-
-                </select>
             </div>
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <p></p>
-                    <button id="cmdSubmit" type="submit" class="btn btn-success btn-lg">Go</button>
-                    <button id="noSubmit" class="btn btn-success btn-lg"><span
-                            class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
-                    </button>
-                </div>
+
+            <select class="js-example-basic-multiple form-control" multiple="" id="selecta">
+
+            </select>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <p></p>
+                <button id="cmdSubmit" type="submit" class="btn btn-success btn-lg">Go</button>
+                <button id="noSubmit" class="btn btn-success btn-lg"><span
+                        class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...
+                </button>
             </div>
         </div>
+    </div>
     </div>
 </header>
 <!-- review modal code-->
 <div>
-    <div class="modal fade" id="addreview" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div data-backdrop="static" class="modal fade" id="addreview" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="exampleModalLabel">Writing Review</h4>
                 </div>
                 <form id="frm_add_reviews" action="" method="post">
                     <div class="modal-body">
 
-                            <div class="form-group">
-                                <input id="rating-input" type="number" />
-                            </div>
-                            <div class="form-group">
-                                <label for="message-text" class="control-label">Message:</label>
-                                <textarea class="form-control" id="message-text"></textarea>
-                            </div>
+                        <div class="form-group">
+                            <input class="form-control" id="txt_place_id" type="text">
+                            <input id="rating-input" type="number"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="message-text" class="control-label">Message:</label>
+                            <textarea class="form-control" id="message-text"></textarea>
+                        </div>
 
                     </div>
                     <div class="modal-footer">
@@ -471,7 +514,7 @@ require_once("lib/initialize.php");
 <script type="text/javascript" src="js/user.js"></script>
 <script src="js/star-rating.js" type="text/javascript"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
 
         $('#rating-input').rating({
             min: 0,
@@ -481,7 +524,7 @@ require_once("lib/initialize.php");
             showClear: false
         });
 
-        $('#rating-input').on('rating.change', function() {
+        $('#rating-input').on('rating.change', function () {
 
         });
     });
