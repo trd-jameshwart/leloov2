@@ -8,18 +8,44 @@ $(document).ready(function(){
     });
 
     $(".logout").click(function(){
-        alert(1);
         window.location.href="public/userAction/logout.php";
     });
     $(document).on('click','.add_review',function(){
+
         $("#txt_place_id").val($(this).attr('data-place_id'));
+
+        FB.getLoginStatus(function (response) {
+          console.log(response.status);
+            if (response.status === 'connected') {
+                $("#addreview").modal('show');
+            } else if (response.status === 'not_authorized') {
+                // The person is logged into Facebook, but not your app.
+                document.getElementById('status').innerHTML = 'Please log ' +
+                'into this app.';
+            } else {
+                $.get("public/userAction/checkuserlogin.php",function(data){
+                    if(data == 1) {
+                        $("#addreview").modal('show');
+                    }else if(data == 0){
+                        alert("Please log in");
+                    }
+                });
+            }
+        });
     });
 
     $("#frm_add_reviews").submit(function(e){
         var rating = $('#rating-input').val();
         var text= $("#message-text").val();
         var placeid= $("#txt_place_id").val();
-        alert(text  +'-------------'+rating +'-------------'+ placeid);
+        $.post("public/userAction/saveUserReview.php",{rating:rating,placeid:placeid,reviewtext:text},function(data){
+            if(data == "not-loggedin"){
+                alert("Please login");
+            }else{
+                alert(data);
+                $('#rating-input').rating('clear');
+            }
+        });
         e.preventDefault();
     });
 
