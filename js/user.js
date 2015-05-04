@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-
     $(document).on('click',"#btn_login",function(){
         var email = $("#txt_email").val();
         var password = $("#txt_password").val();

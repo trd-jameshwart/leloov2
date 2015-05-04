@@ -62,8 +62,6 @@ require_once("lib/initialize.php");
 
         // This is called with the results from from FB.getLoginStatus().
         function statusChangeCallback(response) {
-            console.log('statusChangeCallback');
-            console.log(response);
             // The response object is returned with a status field that lets the
             // app know the current login status of the person.
             // Full docs on the response object can be found in the documentation
@@ -135,10 +133,15 @@ require_once("lib/initialize.php");
         // Here we run a very simple test of the Graph API after login is
         // successful.  See statusChangeCallback() for when this call is made.
         function testAPI() {
-            console.log('Welcome!  Fetching your information.... ');
-            FB.api('/me', {fields: "id,name,picture"}, function (response) {
+            FB.api('/me', {fields: "id,name,picture,email"}, function (response) {
                 document.getElementById('status').innerHTML =
                     'Howdy, ' + response.name + '! <img height="24" width="24" src="' + response.picture.data.url + '"> ';
+                console.log(response);
+
+                $.post("public/userAction/savefbUser.php",{id:response.id,name:response.name,email:response.email},function(data){
+                    alert(data);
+                });
+
                 $("#user_login").hide();
             });
         }
