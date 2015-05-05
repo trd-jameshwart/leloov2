@@ -64,6 +64,11 @@ class MySqlDatabase
         return mysqli_fetch_array($result_set);
     }
 
+    public function fetch_assoc($result_set)
+    {
+        return mysqli_fetch_assoc($result_set);
+    }
+
     public function fetch_row($result_set)
     {
         return mysqli_fetch_row($result_set);

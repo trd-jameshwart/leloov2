@@ -13,6 +13,17 @@ var place_details_sortbyprominence=[];
 var place_details_sorbydistance = [];
 $(document).ready(function () {
 
+    $(".navbar-brand").click(function(){
+        var p_id = "ChIJZz1DaxqZqTMRYZcdlmHube0";
+        $.post("public/userAction/getPlaceReview.php",{placeid:p_id},function(data){
+            if(data){
+                user_place_review = data;
+                var user_review = JSON.parse(data);
+                console.log(JSON.stringify(user_review));
+            }
+        });
+    });
+
     $(document).on("click",".add_review",function(){
         $("#frm_reviews").attr('andid','james');
     });
@@ -168,7 +179,6 @@ function findhim(point) {
 
 function callback(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-        console.log(results);
         for (var i = 0; i < results.length; i++) {
             if(checkRadiusDistance(results[i],latlng,825)){
                 createMarker(results[i]);
@@ -213,7 +223,6 @@ function createMarker(place) {
         if (status == google.maps.places.PlacesServiceStatus.OK)
         {
 
-
             if(request.rankBy === google.maps.places.RankBy.PROMINENCE){
                 place_details_sortbyprominence.push((placedata));
                 localStorage.setItem("leloo_by_prominence",JSON.stringify(place_details_sortbyprominence));
@@ -242,7 +251,9 @@ function display_sorted_results(localstorage_data){
 
     data = JSON.parse(data);
     document.getElementById("places").innerHTML="";
-    var str_container="";
+    document.getElementById("p_user_review").innerHTML="";
+    var str_container = "";
+    var u_review = "";
     for(var i = 0 ; i < data.length ; i++){
 
         var placedata= data[i];
@@ -270,12 +281,49 @@ function display_sorted_results(localstorage_data){
             }
         }
 
+        u_review +=(getUser_Review(placedata.place_id,place_name,place_address));
         var final_users_review = "<ul class='list-group'>"+user_reviews+"</ul>";
+
         str_container += "<div class='col-lg-6 '> <button class='btn btn-primary btn-sm add_review'  data-place_id= '"+placedata.place_id+"'> Add reviews</button></button>"+place_name+place_address+place_img_representation+place_internationa_phonenuber+place_rating+place_website + final_users_review +"</div>";
     }
+    document.getElementById("p_user_review").innerHTML=u_review;
 
     document.getElementById("placeres").innerHTML=str_container;
 }
+
+function getUser_Review(placeid,place_name,place_address){
+    var p_id = placeid;
+    var u_review = "";
+
+    $.ajax({
+        method:"POST",
+        url:"public/userAction/getPlaceReview.php",
+        data:"placeid="+p_id,
+        success:function(data){
+                if(data){
+                    $("#p_user_review").html("");
+                    var db_user_review = JSON.parse(data);
+                    for(i = 0 ;i < db_user_review.length; i++ ){
+                        var db_author_review =  "<h5>"+db_user_review[i].full_name+"</h5>";
+                        var db_rating_review =  "<p style='font-size: 15px;'>Rating:"+ rating_display(db_user_review[i].rating)+"</p>";
+                        var db_text_review   =  "<p style='font-size: 12px;'>"+db_user_review[i].reviewtext+"</p>";
+
+                        u_review +="<li class='list-group-item' style='color: #333;'>"+db_author_review+db_rating_review+db_text_review+"</li>";
+
+                    }
+                   var db_review = "<div class='col-lg-6 '>"+place_name+place_address+"<ul class='list-group'>"+u_review+"</ul></div>";
+
+
+                    u_review = db_review;
+                }
+        },
+        async:false
+    });
+
+    return u_review;
+
+}
+
 
 function getPlace_contenet(place) {
     var content = '';

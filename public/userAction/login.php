@@ -9,7 +9,13 @@ if(isset($_POST['email']) && isset($_POST['password'])){
             $user_email = $dbcore->escape_value($_POST['email']);
             $user_pword = $dbcore->escape_value($_POST['password']);
             if($user->user_login($user_email,$user_pword)){
-                echo "1";
+
+                $response = [
+                    "res" =>1,
+                    "username"=>$user->user_fullname
+                ];
+
+                echo json_encode($response);
             }else{
                 echo "incorrect username or password";
             }
