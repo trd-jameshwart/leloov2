@@ -289,7 +289,7 @@ require_once("lib/initialize.php");
             <div class="intro-text">
 
                     <span class="skills"><strong>Leloo</strong> is an app that helps you when going to new places when you're letting loose of yourself. Great companion, just hit of a button and you will know your current location and places near you (eg. <i>bars,
-                            hotels, stores, etc.</i>). If you find this app useful or you have suggestions to improve this app, you may send us a feedback at <strong>Contact</strong> section</span>
+                            hotels, stores, etc.</i>).
                     <span class="intro"><p>To <strong>start</strong>&nbsp;select place/s you want know about, then hit
                             <strong>Go</strong>.</p></span>
 
@@ -390,7 +390,6 @@ require_once("lib/initialize.php");
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <div id="placeres">
-
                 </div>
             </div>
         </div>

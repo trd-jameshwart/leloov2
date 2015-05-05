@@ -271,7 +271,7 @@ function display_sorted_results(localstorage_data){
         }
 
         var final_users_review = "<ul class='list-group'>"+user_reviews+"</ul>";
-        str_container += "<div class='col-lg-6 '> <button class='btn-primary add_review'  data-place_id= '"+placedata.place_id+"'> Add reviews</button></button>"+place_name+place_address+place_img_representation+place_internationa_phonenuber+place_rating+place_website + final_users_review +"</div>";
+        str_container += "<div class='col-lg-6 '> <button class='btn btn-primary btn-sm add_review'  data-place_id= '"+placedata.place_id+"'> Add reviews</button></button>"+place_name+place_address+place_img_representation+place_internationa_phonenuber+place_rating+place_website + final_users_review +"</div>";
     }
 
     document.getElementById("placeres").innerHTML=str_container;
