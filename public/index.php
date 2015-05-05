@@ -134,12 +134,12 @@ require_once("lib/initialize.php");
         // successful.  See statusChangeCallback() for when this call is made.
         function testAPI() {
             FB.api('/me', {fields: "id,name,picture,email"}, function (response) {
-                document.getElementById('status').innerHTML =
-                    'Howdy, ' + response.name + '! <img height="24" width="24" src="' + response.picture.data.url + '"> ';
-                console.log(response);
-
                 $.post("public/userAction/savefbUser.php",{id:response.id,name:response.name,email:response.email},function(data){
-                    alert(data);
+                    if(data == 1){
+                        $(".userinfo_container").html(response.name+' <div style="padding-top: 12.5px;padding-bottom: 19.5px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group"><button type="button" class="btn btn-primary btn-sm logout">Logout</button></div>');
+                        $("#status").hide();
+                        $(".login_wrapper").html("");
+                    }
                 });
 
                 $("#user_login").hide();
@@ -208,8 +208,7 @@ require_once("lib/initialize.php");
 
                         <div class="user_reg login_wrapper">
 
-                            <form id="user_login" accept-charset="UTF-8"
-                                  action="<?php echo urlencode('assets/userAction/login.php'); ?>" method="post">
+                            <form id="user_login" accept-charset="UTF-8" method="post">
                                 &nbsp;or
                                 <input class="form-control" id="txt_email" type="email" required="email"
                                        placeholder="Email">
@@ -326,9 +325,11 @@ require_once("lib/initialize.php");
                 </div>
                 <form id="frm_add_reviews" action="" method="post">
                     <div class="modal-body">
+                        <div id="review_error_container">
 
+                        </div>
                         <div class="form-group">
-                            <input class="form-control" id="txt_place_id" type="text">
+                            <input class="form-control" id="txt_place_id" type="hidden">
                             <input id="rating-input" type="number"/>
                         </div>
                         <div class="form-group">
@@ -390,7 +391,13 @@ require_once("lib/initialize.php");
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
                 <div id="placeres">
-
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <div id="p_user_review">
                 </div>
             </div>
         </div>
