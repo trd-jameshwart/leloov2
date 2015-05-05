@@ -6,8 +6,19 @@ $(document).ready(function(){
 
     });
 
-    $(".logout").click(function(){
-        window.location.href="public/userAction/logout.php";
+    $(document).on("click",".logout",function(){
+
+        FB.getLoginStatus(function (response) {
+           if(response.status === 'connected' ){
+               FB.logout(function(response) {
+                   // user is now logged out
+                   window.location.href="public/userAction/logout.php";
+               });
+           }else{
+               window.location.href="public/userAction/logout.php";
+           }
+        });
+
     });
     $(document).on('click','.add_review',function(){
 
@@ -39,10 +50,19 @@ $(document).ready(function(){
         var placeid= $("#txt_place_id").val();
         $.post("public/userAction/saveUserReview.php",{rating:rating,placeid:placeid,reviewtext:text},function(data){
             if(data == "not-loggedin"){
-                alert("Please login");
+                $("#review_error_container").html("<div class='alert alert-warning alert-dismissable'> <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button> <strong>Please Login first.</strong></div>");
             }else{
-                alert(data);
+                $("#review_error_container").html("<div class='alert alert-success alert-dismissable'> <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button> <strong>Review submitted successfully.</strong></div>");
                 $('#rating-input').rating('clear');
+                $("#message-text").val("");
+
+                setTimeout(function(){
+                    $("#review_error_container").animate({},'slow','swing',function(){
+                        $("#review_error_container").html("");
+                    });
+
+                },3000)
+
             }
         });
         e.preventDefault();
@@ -61,6 +81,10 @@ $(document).ready(function(){
                     $("#reg_error").html("").fadeIn("<div class='alert alert-danger alert-dismissable'> <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button> <strong>Please fill up empty fields</strong></div>");
                 }else{
                     $("#reg_error").html("").prepend("<div class='alert alert-success alert-dismissable'> <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button> <strong>Registration Successful</strong></div>");
+                    $(".userinfo_container").html( user_name+' <div style="padding-top: 12.5px;padding-bottom: 19.5px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group"><button type="button" class="btn btn-primary btn-sm logout">Logout</button></div>');
+                    $("#status").hide();
+                    $(".login_wrapper").html("");
+
                     $("#frm_regiters input[name='username'] ").val("");
                     $("#frm_regiters input[name='useremail']").val("");
                     $("#frm_regiters input[name='userpassword']").val("");
@@ -85,15 +109,16 @@ $(document).ready(function(){
 
         }else {
             $.post("public/userAction/login.php",{email:user_email,password:password},function(data){
-
-                if(data=='0'){
+                var res = JSON.parse(data);
+                console.log(res.res);
+                if(res=='0'){
                     alert("empty user name and password");
-                }else if(data=='1'){
-                    alert("user successfully login");
+                }else if(res.res=='1'){
+                    $(".userinfo_container").html(res.username+' <div style="padding-top: 12.5px;padding-bottom: 19.5px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group"><button type="button" class="btn btn-primary btn-sm logout">Logout</button></div>');
+                    $("#status").hide();
+                    $(".login_wrapper").html("");
                     $("#txt_email").val("");
                     $("#txt_password").val("");
-                   location.reload();
-                   // $(".login_wrapper").html("");
                 }else{
                     alert(data);
                 }
