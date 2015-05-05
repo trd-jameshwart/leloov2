@@ -10,10 +10,9 @@ if(isset($_POST['email']) && isset($_POST['password'])){
             $user_pword = $dbcore->escape_value($_POST['password']);
             if($user->user_login($user_email,$user_pword)){
 
-                $response = [
-                    "res" =>1,
+                $response = array("res" =>1,
                     "username"=>$user->user_fullname
-                ];
+                );
 
                 echo json_encode($response);
             }else{
