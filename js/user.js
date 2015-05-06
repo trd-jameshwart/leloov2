@@ -30,14 +30,14 @@ $(document).ready(function(){
                 $("#addreview").modal('show');
             } else if (response.status === 'not_authorized') {
                 // The person is logged into Facebook, but not your app.
-                document.getElementById('status').innerHTML = 'Please log ' +
-                'into this app.';
+                bootbox.alert("Please log in this app.");
             } else {
                 $.get("public/userAction/checkuserlogin.php",function(data){
                     if(data == 1) {
                         $("#addreview").modal('show');
                     }else if(data == 0){
-                        alert("Please log in");
+                        bootbox.alert("Please log in.");
+
                     }
                 });
             }
@@ -112,7 +112,7 @@ $(document).ready(function(){
                 var res = JSON.parse(data);
                 console.log(res.res);
                 if(res=='0'){
-                    alert("empty user name and password");
+                    bootbox.alert("User name and password is empty.");
                 }else if(res.res=='1'){
                     $(".userinfo_container").html(res.username+' <div style="padding-top: 12.5px;padding-bottom: 19.5px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group"><button type="button" class="btn btn-primary btn-sm logout">Logout</button></div>');
                     $("#status").hide();
@@ -120,7 +120,7 @@ $(document).ready(function(){
                     $("#txt_email").val("");
                     $("#txt_password").val("");
                 }else{
-                    alert(data);
+                    bootbox.alert(data);
                 }
             });
         }
