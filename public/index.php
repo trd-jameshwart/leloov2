@@ -202,7 +202,7 @@ require_once("lib/initialize.php");
                             <fb:login-button data-max-rows="1" data-size="large" data-show-faces="false"
                                              data-auto-logout-link="true" scope="public_profile,email"
                                              onlogin="checkLoginState();">
-                            </fb:login-button>
+                            </fb:login-button><div id="fb-root"></div>
                         </div>
 
 
