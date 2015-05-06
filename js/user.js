@@ -9,14 +9,14 @@ $(document).ready(function(){
     $(document).on("click",".logout",function(){
 
         FB.getLoginStatus(function (response) {
-           if(response.status === 'connected' ){
-               FB.logout(function(response) {
-                   // user is now logged out
-                   window.location.href="public/userAction/logout.php";
-               });
-           }else{
-               window.location.href="public/userAction/logout.php";
-           }
+            if(response.status === 'connected' ){
+                FB.logout(function(response) {
+                    // user is now logged out
+                    window.location.href="public/userAction/logout.php";
+                });
+            }else{
+                window.location.href="public/userAction/logout.php";
+            }
         });
 
     });
@@ -25,7 +25,7 @@ $(document).ready(function(){
         $("#txt_place_id").val($(this).attr('data-place_id'));
 
         FB.getLoginStatus(function (response) {
-          console.log(response.status);
+            console.log(response.status);
             if (response.status === 'connected') {
                 $("#addreview").modal('show');
             } else if (response.status === 'not_authorized') {
@@ -120,7 +120,7 @@ $(document).ready(function(){
                     $("#txt_email").val("");
                     $("#txt_password").val("");
                 }else{
-                    bootbox.alert(data);
+                    bootbox.alert(res.res);
                 }
             });
         }
