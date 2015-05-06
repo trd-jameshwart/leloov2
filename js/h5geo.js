@@ -281,17 +281,19 @@ function display_sorted_results(localstorage_data){
             }
         }
 
-        u_review +=(getUser_Review(placedata.place_id,place_name,place_address));
+        getUser_Review(placedata.place_id,place_name,place_address,function(data){
+            u_review +=data;
+            document.getElementById("p_user_review").innerHTML =u_review;
+        });
+
         var final_users_review = "<ul class='list-group'>"+user_reviews+"</ul>";
 
         str_container += "<div class='col-lg-6 '> <button class='btn btn-primary btn-sm add_review'  data-place_id= '"+placedata.place_id+"'> Add reviews</button></button>"+place_name+place_address+place_img_representation+place_internationa_phonenuber+place_rating+place_website + final_users_review +"</div>";
     }
-    document.getElementById("p_user_review").innerHTML=u_review;
-
     document.getElementById("placeres").innerHTML=str_container;
 }
 
-function getUser_Review(placeid,place_name,place_address){
+function getUser_Review(placeid,place_name,place_address,callback){
     var p_id = placeid;
     var u_review = "";
 
@@ -314,13 +316,11 @@ function getUser_Review(placeid,place_name,place_address){
                    var db_review = "<div class='col-lg-6 '>"+place_name+place_address+"<ul class='list-group'>"+u_review+"</ul></div>";
 
 
-                    u_review = db_review;
+                    callback(db_review);
                 }
-        },
-        async:false
+        }
     });
 
-    return u_review;
 
 }
 
