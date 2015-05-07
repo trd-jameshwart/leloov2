@@ -136,13 +136,15 @@ require_once("lib/initialize.php");
             FB.api('/me', {fields: "id,name,picture,email"}, function (response) {
                 $.post("public/userAction/savefbUser.php",{id:response.id,name:response.name,email:response.email},function(data){
                     if(data == 1){
-                        $(".userinfo_container").html(response.name+' <div style="padding-top: 12.5px;padding-bottom: 19.5px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group"><button type="button" class="btn btn-primary btn-sm logout">Logout</button></div>');
+                        $("#user_login").hide();
                         $("#status").hide();
                         $(".login_wrapper").html("");
+                        $(".userinfo_container").html(response.name+' <div style="padding-top: 12.5px;padding-bottom: 19.5px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group"><button type="button" class="btn btn-primary btn-sm logout">Logout</button></div>');
+
                     }
                 });
 
-                $("#user_login").hide();
+
             });
         }
     </script>
