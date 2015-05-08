@@ -26,7 +26,7 @@ if(isset($_POST["name"]) && isset($_POST["email"]) && isset($_POST["id"])){
             $email = $dbcore->escape_value($_POST["email"]);
             $id = $dbcore->escape_value($_POST["id"]);
 
-            if($dbcore->insert('user_info',array("id"=>$id,"full_name"=>$name,"user_email"=>$email))){
+            if($dbcore->insert('user_info',array("id"=>$id,"full_name"=>$name,"user_email"=>$email,"user_password"=>''))){
                 $_SESSION['userid']=$id;
                 echo "1";
             }else{
