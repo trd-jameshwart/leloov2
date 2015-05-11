@@ -185,7 +185,7 @@ require_once("lib/initialize.php");
                             </div>
                             <div class="modal-body">
                                 <div class="login_wrapper">
-                                    <button class="btn btn-primary btn-sm" style="background-color: #5776Cd;border-color: #5776Cd;" onclick="facebook_login();"><i class="fa fa-facebook"></i> Log In</button>
+                                    <button class="btn btn-primary btn-sm" style="background-color: #5776Cd;border-color: #5776Cd;" onclick="facebook_login();"><i class="fa fa-facebook"></i> connect</button>
                                     <div id="fb-root"></div>
                                 </div>
 
