@@ -79,7 +79,11 @@ require_once("lib/initialize.php");
                                 $("#user_login").hide();
                                 $("#status").hide();
                                 $(".login_wrapper").html("");
-                                $(".userinfo_container").html(response.name+' <div style="padding-top: 12.5px;padding-bottom: 19.5px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group"><button type="button" class="btn btn-primary btn-sm logout">Logout</button></div>');
+                                $("#btn_register").hide();
+                                $(".userinfo_container").html(response.name+' <div style="padding-top: 2px;padding-bottom: 10px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group"><button type="button" class="btn btn-primary btn-sm logout">Logout</button></div>');
+                                setTimeout(function(){
+                                    $('#registerModal').fadeOut('slow');
+                                },1000);
 
                             }
                         });
@@ -133,14 +137,12 @@ require_once("lib/initialize.php");
                     <a href="#contact">Contact</a>
                 </li>
                 <li id="mnu_4" class="page-scroll">
-
                     <div class="userinfo_container">
                         <?php
                         if ($user->is_logged_in()) {
                             echo $user->user_fullname . " ";
                             ?>
-
-                            <div style="padding-top: 12.5px;padding-bottom: 19.5px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group">
+                            <div style="padding-bottom: 10px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group">
                                 <button type="button" class="btn btn-primary btn-sm logout">Logout</button>
                             </div>
                         <?php
@@ -152,33 +154,9 @@ require_once("lib/initialize.php");
                         ?>
                         <div id="status">
                         </div>
-                        <div class="login_wrapper">
-
-                            <button class="btn btn-primary btn-sm" style="background-color: #5776Cd;border-color: #5776Cd;" onclick="facebook_login();"><i class="fa fa-facebook"></i> Log In</button>
-                            <div id="fb-root"></div>
-                        </div>
-
-
-                        <div class="user_reg login_wrapper">
-
-                            <form id="user_login" accept-charset="UTF-8" method="post">
-                                &nbsp;or
-                                <input class="form-control" id="txt_email" type="email" required="email"
-                                       placeholder="Email">
-                                <input class="form-control" id="txt_password" type="password" required="password"
-                                       placeholder="Password">
-
-                                <p>
-
-                                <div id="btn-group-login" class="btn-group" role="group"
-                                     aria-label="Default button group">
-                                    <button class="btn btn-success btn-sm" id="btn_login">Login</button>
-                                    <button type="button" id="btn_register" class="btn btn-primary btn-sm"
-                                            data-toggle="modal" data-target="#registerModal">Register
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                        <button type="button" id="btn_register" class="btn btn-primary btn-sm"
+                                data-toggle="modal" data-target="#registerModal">Login
+                        </button>
                     <?php
                     }
                     ?>
@@ -203,12 +181,38 @@ require_once("lib/initialize.php");
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                         aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="exampleModalLabel" style="color:#000000">Please fill out the
-                                    following fields</h4>
+                                <h4 class="modal-title" id="exampleModalLabel" style="text-transform:none;color:#545454">Login or Register</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="login_wrapper">
+                                    <button class="btn btn-primary btn-sm" style="background-color: #5776Cd;border-color: #5776Cd;" onclick="facebook_login();"><i class="fa fa-facebook"></i> Log In</button>
+                                    <div id="fb-root"></div>
+                                </div>
+
+
+                                <div class="user_reg login_wrapper">
+
+                                    <form id="user_login" accept-charset="UTF-8" method="post">
+                                        &nbsp;or
+                                        <input class="form-control" id="txt_email" type="email" required="email"
+                                               placeholder="Email">
+                                        <input class="form-control" id="txt_password" type="password" required="password"
+                                               placeholder="Password">
+
+                                        <p>
+
+                                        <div id="btn-group-login" class="btn-group" role="group"
+                                             aria-label="Default button group">
+                                            <button class="btn btn-success btn-sm" id="btn_login">Login</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                             <form id="frm_regiters" accept-charset="UTF-8" method="post">
                                 <div class="modal-body">
                                     <div id="reg_error"></div>
+                                    <h5 class="modal-title" id="exampleModalLabel" style="text-transform:capitalize;color:red">Please fill out the
+                                        following fields.</h5>
                                     <div class="form-group">
                                         <input name="username" type="text" class="form-control" placeholder="Name">
                                     </div>
@@ -219,7 +223,6 @@ require_once("lib/initialize.php");
                                         <input name="userpassword" type="password" class="form-control"
                                                placeholder="Password">
                                     </div>
-
                                 </div>
                                 <div class="modal-footer">
                                     <button class="btn btn-default" data-dismiss="modal">Close</button>

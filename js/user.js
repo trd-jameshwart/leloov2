@@ -57,9 +57,10 @@ $(document).ready(function(){
                     $("#reg_error").html("").fadeIn("<div class='alert alert-danger alert-dismissable'> <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button> <strong>Please fill up empty fields</strong></div>");
                 }else{
                     $("#reg_error").html("").prepend("<div class='alert alert-success alert-dismissable'> <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button> <strong>Registration Successful</strong></div>");
-                    $(".userinfo_container").html( user_name+' <div style="padding-top: 12.5px;padding-bottom: 19.5px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group"><button type="button" class="btn btn-primary btn-sm logout">Logout</button></div>');
+                    $(".userinfo_container").html( user_name+' <div style="padding-top: 2px;padding-bottom: 10px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group"><button type="button" class="btn btn-primary btn-sm logout">Logout</button></div>');
                     $("#status").hide();
                     $(".login_wrapper").html("");
+                    $("#btn_register").hide();
 
                     $("#frm_regiters input[name='username'] ").val("");
                     $("#frm_regiters input[name='useremail']").val("");
@@ -90,14 +91,27 @@ $(document).ready(function(){
                 if(res=='0'){
                     bootbox.alert("User name and password is empty.");
                 }else if(res.res=='1'){
-                    $(".userinfo_container").html(res.username+' <div style="padding-top: 12.5px;padding-bottom: 19.5px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group"><button type="button" class="btn btn-primary btn-sm logout">Logout</button></div>');
+                    $(".userinfo_container").html(res.username+' <div style="padding-top: 2px;padding-bottom: 10px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group"><button type="button" class="btn btn-primary btn-sm logout">Logout</button></div>');
                     $("#status").hide();
                     $(".login_wrapper").html("");
+                    $("#btn_register").hide();
                     $("#txt_email").val("");
                     $("#txt_password").val("");
+                    setTimeout(function(){
+                        $('#registerModal').fadeOut('slow');
+                    },1000);
+
+
+
                 }else{
                     bootbox.alert(res.res);
+
+                    setTimeout(function(){
+                        $('#registerModal').fadeOut('slow');
+                    },1000)
                 }
+
+
             });
         }
 
