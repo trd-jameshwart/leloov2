@@ -1,47 +1,23 @@
 $(document).ready(function(){
 
-    $(document).on('click',"#btn_login",function(){
-        var email = $("#txt_email").val();
-        var password = $("#txt_password").val();
-
-    });
 
     $(document).on("click",".logout",function(){
-
-        FB.getLoginStatus(function (response) {
-            if(response.status === 'connected' ){
-                FB.logout(function(response) {
-                    // user is now logged out
-                    window.location.href="public/userAction/logout.php";
-                });
-            }else{
-                window.location.href="public/userAction/logout.php";
-            }
-        });
-
+       window.location.href="public/userAction/logout.php";
     });
+
     $(document).on('click','.add_review',function(){
 
         $("#txt_place_id").val($(this).attr('data-place_id'));
 
-        FB.getLoginStatus(function (response) {
-            console.log(response.status);
-            if (response.status === 'connected') {
+        $.get("public/userAction/checkuserlogin.php",function(data){
+            if(data == 1) {
                 $("#addreview").modal('show');
-            } else if (response.status === 'not_authorized') {
-                // The person is logged into Facebook, but not your app.
-                bootbox.alert("Please log in this app.");
-            } else {
-                $.get("public/userAction/checkuserlogin.php",function(data){
-                    if(data == 1) {
-                        $("#addreview").modal('show');
-                    }else if(data == 0){
-                        bootbox.alert("Please log in.");
+            }else if(data == 0){
+                bootbox.alert("Please log in.");
 
-                    }
-                });
             }
         });
+
     });
 
     $("#frm_add_reviews").submit(function(e){
