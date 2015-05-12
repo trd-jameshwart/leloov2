@@ -67,7 +67,7 @@
     display: none;
 }
 section{
-    padding: 180px 0 50px;
+    padding: 80px 0 30px;
 }
 .intro > p{
     font-size: 30px;
@@ -101,7 +101,7 @@ section{
     color: #545454;
 }
 #mnu_4{
-    padding: 10px 15px;
+    /*padding: 10px 15px;*/
 }
 #status{
     color: #fff;
@@ -122,4 +122,12 @@ textarea {
     text-transform: none;
     font-size: 1.4em;
 }
-
+#page-top > header > div{
+    padding: 120px 0 0 0;
+}
+.user_cont{
+    padding: 15px 15px;
+}
+.or {
+    color: #545454;
+}

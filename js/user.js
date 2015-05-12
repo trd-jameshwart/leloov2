@@ -61,6 +61,7 @@ $(document).ready(function(){
                     $("#status").hide();
                     $(".login_wrapper").html("");
                     $("#btn_register").hide();
+                    $(".userinfo_container").css("padding","10px 15px");
 
                     $("#frm_regiters input[name='username'] ").val("");
                     $("#frm_regiters input[name='useremail']").val("");
@@ -95,6 +96,7 @@ $(document).ready(function(){
                     $("#status").hide();
                     $(".login_wrapper").html("");
                     $("#btn_register").hide();
+                    $(".userinfo_container").css("padding","10px 15px");
                     $("#txt_email").val("");
                     $("#txt_password").val("");
                     setTimeout(function(){

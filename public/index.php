@@ -80,6 +80,7 @@ require_once("lib/initialize.php");
                                 $("#status").hide();
                                 $(".login_wrapper").html("");
                                 $("#btn_register").hide();
+                                $(".userinfo_container").css("padding","10px 15px");
                                 $(".userinfo_container").html(response.name+' <div style="padding-top: 2px;padding-bottom: 10px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group"><button type="button" class="btn btn-primary btn-sm logout">Logout</button></div>');
                                 setTimeout(function(){
                                     $('#registerModal').fadeOut('slow');
@@ -140,10 +141,14 @@ require_once("lib/initialize.php");
                     <div class="userinfo_container">
                         <?php
                         if ($user->is_logged_in()) {
+                            ?>
+                            <div class="user_cont">
+                            <?php
                             echo $user->user_fullname . " ";
                             ?>
-                            <div style="padding-bottom: 10px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group">
-                                <button type="button" class="btn btn-primary btn-sm logout">Logout</button>
+                                <div id="btn-group-login" class="btn-group" role="group" aria-label="Default button group">
+                                    <button type="button" class="btn btn-primary btn-sm logout">Logout</button>
+                                </div>
                             </div>
                         <?php
                         }
@@ -154,9 +159,8 @@ require_once("lib/initialize.php");
                         ?>
                         <div id="status">
                         </div>
-                        <button type="button" id="btn_register" class="btn btn-primary btn-sm"
-                                data-toggle="modal" data-target="#registerModal">Login
-                        </button>
+                        <a href="#" id="btn_register" data-toggle="modal" data-target="#registerModal">Login
+                        </a>
                     <?php
                     }
                     ?>
@@ -181,7 +185,7 @@ require_once("lib/initialize.php");
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                         aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="exampleModalLabel" style="text-transform:none;color:#545454">Login or Register</h4>
+                                <h4 class="modal-title" id="exampleModalLabel" style="text-transform:none;color:#545454">Sign in</h4>
                             </div>
                             <div class="modal-body">
                                 <div class="login_wrapper">
@@ -193,7 +197,7 @@ require_once("lib/initialize.php");
                                 <div class="user_reg login_wrapper">
 
                                     <form id="user_login" accept-charset="UTF-8" method="post">
-                                        &nbsp;or
+                                        &nbsp;<span class="or">or</span>
                                         <input class="form-control" id="txt_email" type="email" required="email"
                                                placeholder="Email">
                                         <input class="form-control" id="txt_password" type="password" required="password"
@@ -211,8 +215,8 @@ require_once("lib/initialize.php");
                             <form id="frm_regiters" accept-charset="UTF-8" method="post">
                                 <div class="modal-body">
                                     <div id="reg_error"></div>
-                                    <h5 class="modal-title" id="exampleModalLabel" style="text-transform:capitalize;color:red">Please fill out the
-                                        following fields.</h5>
+                                    <hr>
+                                    <h4 class="modal-title" id="exampleModalLabel" style="text-transform:none;color:#545454">Quick sign up</h4>
                                     <div class="form-group">
                                         <input name="username" type="text" class="form-control" placeholder="Name">
                                     </div>
@@ -225,8 +229,8 @@ require_once("lib/initialize.php");
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button id="btn_register" type="submit" name="register" class="btn btn-primary">
+                                    <button class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                                    <button id="btn_register" type="submit" name="register" class="btn btn-primary btn-sm">
                                         Continue
                                     </button>
                                 </div>
