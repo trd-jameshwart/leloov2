@@ -100,17 +100,10 @@ $(document).ready(function(){
                     $("#txt_email").val("");
                     $("#txt_password").val("");
                     setTimeout(function(){
-                        $('#registerModal').fadeOut('slow');
+                        $('#registerModal').modal('hide');
                     },1000);
-
-
-
                 }else{
                     bootbox.alert(res.res);
-
-                    setTimeout(function(){
-                        $('#registerModal').fadeOut('slow');
-                    },1000)
                 }
 
 
