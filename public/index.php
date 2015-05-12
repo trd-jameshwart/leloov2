@@ -137,7 +137,7 @@ require_once("lib/initialize.php");
                 <li id="mnu_3" class="page-scroll">
                     <a href="#contact">Contact</a>
                 </li>
-                <li id="mnu_4" class="page-scroll">
+                <li id="mnu_4">
                     <div class="userinfo_container">
                         <?php
                         if ($user->is_logged_in()) {
