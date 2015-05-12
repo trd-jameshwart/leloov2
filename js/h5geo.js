@@ -63,7 +63,12 @@ $(document).ready(function () {
             }, 2000)
         } else {
             $('#alert-msg').html("<div class='alert alert-warning alert-dismissable'> <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Ops!&nbsp;</strong>Please select place/s.</div>");
-
+            var placelength = $("#placeres").html();
+            if(placelength.length <= 0){
+                $("#mnu_1,#your").css("display","none");
+            }else if(placelength.length >0){
+                $("#mnu_1,#your").css("display","block");
+            }
         }
     });
 

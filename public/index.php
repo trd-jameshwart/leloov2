@@ -346,8 +346,7 @@ require_once("lib/initialize.php");
         </div>
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">
-                <div id="placeres">
-           </div>
+                <div id="placeres"></div>
             </div>
         </div>
         <hr/>
