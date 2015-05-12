@@ -83,7 +83,7 @@ require_once("lib/initialize.php");
                                 $(".userinfo_container").css("padding","10px 15px");
                                 $(".userinfo_container").html(response.name+' <div style="padding-top: 2px;padding-bottom: 10px;" id="btn-group-login" class="btn-group" role="group" aria-label="Default button group"><button type="button" class="btn btn-primary btn-sm logout">Logout</button></div>');
                                 setTimeout(function(){
-                                    $('#registerModal').fadeOut('slow');
+                                   $('#registerModal').modal('hide');
                                 },1000);
 
                             }
